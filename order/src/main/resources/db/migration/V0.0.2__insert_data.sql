@@ -1,0 +1,2 @@
+INSERT INTO public.orders (id, product_id, amount, customer_first_name, customer_last_name) VALUES (1, 1, 1, 'Wehhab', 'BELKACEMI');
+INSERT INTO public.orders (id, product_id, amount, customer_first_name, customer_last_name) VALUES (2, 2, 2, 'Ahmed', 'BELKACEM');

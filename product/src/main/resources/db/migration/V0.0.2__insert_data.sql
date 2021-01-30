@@ -1,0 +1,2 @@
+INSERT INTO public.product (id, name, description, price) VALUES (1, 'Ecouteur sans fil', 'Tres jolis ecouteurs', 20);
+INSERT INTO public.product (id, name, description, price) VALUES (2, 'Batterie externe', 'Tres jolie batterie', 19);

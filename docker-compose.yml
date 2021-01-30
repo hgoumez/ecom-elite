@@ -1,0 +1,51 @@
+version: '2'
+services:
+  product:
+    build:
+      context: product
+      dockerfile: Dockerfile
+    image: product
+    container_name: product
+    ports:
+      - "8070:8080"
+    links:
+      - product-postgres:product-bdd
+  order:
+    build:
+      context: order
+      dockerfile: Dockerfile
+    image: order
+    container_name: order
+    ports:
+      - "8071:8080"
+    links:
+      - order-postgres:order-bdd
+
+  ecom-elite-front:
+    build:
+      context: ecom-elite-front
+      dockerfile: Dockerfile
+    container_name: ecom-elite-front
+    image: ecom-elite-front
+    links:
+      - product:product-api
+      - order:order-api
+    ports:
+      - "8072:80"
+    volumes:
+      - ./ecom-elite-front/conf:/etc/nginx/conf.d/
+
+  order-postgres:
+    image: postgres
+    container_name: order-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=order
+  product-postgres:
+    image: postgres
+    container_name: product-postgres
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_PASSWORD=product
