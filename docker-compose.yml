@@ -10,16 +10,31 @@ services:
       - "8070:8080"
     links:
       - product-postgres:product-bdd
-  order:
+  order-1:
     build:
       context: order
       dockerfile: Dockerfile
     image: order
-    container_name: order
+    container_name: order-1
     ports:
       - "8071:8080"
     links:
       - order-postgres:order-bdd
+    environment:
+      server_name: "order-1"
+
+  order-2:
+    build:
+      context: order
+      dockerfile: Dockerfile
+    image: order
+    container_name: order-2
+    ports:
+      - "8073:8080"
+    links:
+      - order-postgres:order-bdd
+    environment:
+      server_name: "order-2"
 
   ecom-elite-front:
     build:
@@ -29,7 +44,8 @@ services:
     image: ecom-elite-front
     links:
       - product:product-api
-      - order:order-api
+      - order-1:order-1-api
+      - order-2:order-2-api
     ports:
       - "8072:80"
     volumes:

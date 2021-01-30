@@ -9,6 +9,10 @@ export class OrderService {
 
   constructor(private readonly http: HttpClient) { }
 
+  getServerName(): Observable<any> {
+    return this.http.get('/order-api/server-name');
+  }
+
   getOrders(): Observable<any> {
     return this.http.get('/order-api/orders');
   }

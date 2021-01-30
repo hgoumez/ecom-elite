@@ -16,6 +16,11 @@ public class OrderController {
         this.service = service;
     }
 
+    @GetMapping("/server-name")
+    public String getServerName() {
+        return System.getenv("server_name");
+    }
+
     @GetMapping("/orders")
     public List<Order> getAllOrders() {
         return service.getAllOrders();

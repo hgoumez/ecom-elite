@@ -12,11 +12,13 @@ import { first } from 'rxjs/operators'
 export class AppComponent implements OnInit {
   products$: Observable<any>;
   orders$: Observable<any>;
+  name$: Observable<any>;
 
   constructor(private readonly productService: ProductService,private readonly orderService: OrderService) {}
 
   ngOnInit() {
     this.products$ = this.productService.getProducts().pipe(first());
     this.orders$ = this.orderService.getOrders().pipe(first());
+    this.name$ = this.orderService.getServerName().pipe(first());
   }
 }
