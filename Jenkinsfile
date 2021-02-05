@@ -7,7 +7,11 @@ node ("master") {
 
 
     stage ("build") {
-        println("build")
+        println("building Order project")
+        sh "cd order && ./mvnw clean package"
+
+        println("building Product project")
+        sh "cd product && ./mvnw clean package"
     }
 
     stage ("test") {
