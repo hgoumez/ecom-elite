@@ -1,5 +1,6 @@
 stage ("checkout") {
     println("checkout")
+    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/hgoumeziane/ecom-elite.git']]])
 }
 
 stage ("build") {
