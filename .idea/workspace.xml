@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e430b15e-3700-4766-a06c-0c496c39cec1" name="Default Changelist" comment="" />
+    <list default="true" id="e430b15e-3700-4766-a06c-0c496c39cec1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/docker-compose-infra.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/start-infra.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/ecom-elite-front" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1nl9CT1yedlrpeBnsSGNDYEr62G" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -22,10 +27,19 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="jdk.selected.JAVA_MODULE" value="11" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="http.proxy" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="showServicesTree" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -39,6 +53,7 @@
       <updated>1611953682085</updated>
       <workItem from="1611953683696" duration="478000" />
       <workItem from="1611954237420" duration="204000" />
+      <workItem from="1612563947114" duration="988000" />
     </task>
     <servers />
   </component>
@@ -62,6 +77,10 @@
       <screen x="-1920" y="23" width="1920" height="1057" />
     </state>
     <state x="-1619" y="133" width="1171" height="837" key="SettingsEditor/-1920.23.1920.1057/0.23.1920.1177@-1920.23.1920.1057" timestamp="1611954433898" />
+    <state width="500" height="445" key="SwitcherDM" timestamp="1612564244552">
+      <screen x="-1920" y="23" width="1920" height="1057" />
+    </state>
+    <state width="500" height="445" key="SwitcherDM/-1920.23.1920.1057/0.23.1920.1177@-1920.23.1920.1057" timestamp="1612564244552" />
     <state x="-1530" y="174" key="new project wizard" timestamp="1611953845681">
       <screen x="-1920" y="23" width="1920" height="1057" />
     </state>

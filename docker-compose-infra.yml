@@ -1,0 +1,7 @@
+version: '2'
+services:
+  jenkins:
+    container_name: jenkins
+    image: jenkins/jenkins
+    ports:
+      - "9010:8080"
