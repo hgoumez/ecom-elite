@@ -1,4 +1,4 @@
-node ("master") {
+node ("slave-ubuntu-jdk-node") {
 
     stage ("checkout") {
         println("checkout")
@@ -12,6 +12,9 @@ node ("master") {
 
         println("building Product project")
         sh "cd product && ./mvnw clean package"
+
+        println("building front app")
+        sh "cd ecom-elite-front && ng build --prod"
     }
 
     stage ("test") {
