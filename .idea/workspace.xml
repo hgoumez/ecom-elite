@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e430b15e-3700-4766-a06c-0c496c39cec1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/Jenkinsfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jenkins-node.dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/jenkins-node.dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

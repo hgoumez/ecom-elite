@@ -14,7 +14,7 @@ node ("slave-ubuntu-jdk-node") {
         sh "cd product && ./mvnw clean package"
 
         println("building front app")
-        sh "cd ecom-elite-front && ng build --prod"
+        sh "cd ecom-elite-front && npm i && ng build --prod"
     }
 
     stage ("test") {

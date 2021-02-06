@@ -18,6 +18,9 @@ RUN apt-get install openjdk-11-jdk -y
 # Install openssh-server
 RUN apt install openssh-server -y
 
+# Install git
+RUN apt install git -y
+
 # Install ssh keys
 RUN ssh-keygen -q -t rsa -N '' -f /root/.ssh/id_rsa
 RUN cat /root/.ssh/id_rsa
