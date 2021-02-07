@@ -26,5 +26,7 @@ RUN ssh-keygen -q -t rsa -N '' -f /root/.ssh/id_rsa
 RUN cat /root/.ssh/id_rsa
 
 EXPOSE 22
+EXPOSE 8080
+
 ENTRYPOINT ["tail", "-f", "/dev/null"]
 

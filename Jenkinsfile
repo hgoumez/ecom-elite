@@ -22,6 +22,7 @@ node ("slave-ubuntu-jdk-node") {
     }
 
     stage ("deployment") {
-        println("deployment")
+        println("deploying Order service")
+        sh "cd order/target && java -jar order-0.0.1-SNAPSHOT.jar"
     }
 }
