@@ -21,6 +21,7 @@
   * simplicité des requêtes
 ## centralisation de Logs
   * BELK (Beats Elastic Logstash Kibana)
+  * Monitoring de l'application (APM)
 
 
 # DEVOPS
@@ -30,3 +31,9 @@
 ## CI/CD
   * gitlab-ci
   * Jenkins
+## Qualité du code
+  * sonar
+## docker registry 
+## ansible galaxy (en local)
+## nexus or artifactory
+## prometheus & Grafana for application monitoring
