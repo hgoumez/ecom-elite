@@ -15,4 +15,4 @@
 
 
 - name: install angular Cli
-  command: npm i -g @angular/cli@1.6.6
+  command: npm i -g @angular/cli
