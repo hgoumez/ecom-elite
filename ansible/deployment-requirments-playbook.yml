@@ -4,5 +4,6 @@
   hosts: deploy
   roles:
     - role: mhh.aws
+    - role: robertdebock.npm
 
 
