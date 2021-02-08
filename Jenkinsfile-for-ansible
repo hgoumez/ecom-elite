@@ -1,11 +1,11 @@
 node("master") {
     stage("install requirements") {
-        sh "cd ansible && ansible-galaxy install -r requirements.yml"
+        sh "cd /ansible && ansible-galaxy install -r requirements.yml"
     }
 
 
     stage("Launch Playbook") {
-        sh "cd ansible && ansible-playbook -i hosts deployment-requirments-playbook.yml"
+        sh "cd /ansible && ansible-playbook -i hosts deployment-requirments-playbook.yml"
     }
 
 }
