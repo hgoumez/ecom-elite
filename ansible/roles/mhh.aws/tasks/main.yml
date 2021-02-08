@@ -14,5 +14,9 @@
     - docker-compose
 
 
-- name: install angular Cli
-  command: npm i -g @angular/cli
+- name: Install Angular CLI
+  npm:
+    name: "@angular/cli"
+    global: yes
+    state: present
+  failed_when: false
