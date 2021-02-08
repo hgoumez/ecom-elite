@@ -4,8 +4,5 @@
   hosts: deploy
   roles:
     - role: mhh.aws
-    - role: robertdebock.npm
-    - role: geerlingguy.docker
-
 
 

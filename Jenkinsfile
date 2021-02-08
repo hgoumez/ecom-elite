@@ -1,4 +1,4 @@
-node ("master") {
+node ("aws-slave-1") {
 
     stage ("checkout") {
         println("checkout")
@@ -8,21 +8,22 @@ node ("master") {
     
     stage ("build") {
         println("building Order project")
-        sh "cd order && ./mvnw clean package"
+        sh "cd order && ./mvnw clean package -DskipTests"
 
         println("building Product project")
-        sh "cd product && ./mvnw clean package"
+        sh "cd product && ./mvnw clean package -DskipTests"
 
         println("building front app")
         sh "cd ecom-elite-front && npm i && ng build --prod"
     }
 
     stage ("test") {
-        println("test")
+        sh "cd order && ./mvnw test"
+        sh "cd product && ./mvnw test"
     }
 
     stage ("deployment") {
         println("deploying Order service")
-        // sh "cd order/target && java -jar order-0.0.1-SNAPSHOT.jar"
+        sh "docker-compose up -d --build"
     }
 }

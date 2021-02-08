@@ -1,5 +1,8 @@
 ---
 
+- name: install docker
+  command: bash -c "curl -fsSL https://get.docker.com/ | sh"
+
 - name: install requirements
   apt:
     name: "{{ item }}"
@@ -8,3 +11,8 @@
     - git
     - nodejs
     - openjdk-11-jdk
+    - docker-compose
+
+
+- name: install angular Cli
+  command: npm i -g @angular/cli
