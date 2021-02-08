@@ -3,7 +3,7 @@
 - name: install requirements on deploy hosts
   hosts: deploy
   roles:
-    - role: mhh.aws
     - role: robertdebock.npm
+    - role: mhh.aws
 
 
