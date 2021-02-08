@@ -1,0 +1,3 @@
+ansible_os_family: ubuntu
+npm_registry: default
+ansible_distribution: ubuntu

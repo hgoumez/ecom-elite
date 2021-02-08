@@ -1,7 +1,16 @@
 version: '2'
+
+volumes:
+  jenkins_data:
+
+
 services:
   jenkins:
     container_name: jenkins
     image: jenkins/jenkins
+    user: root
     ports:
       - "9010:8080"
+    volumes:
+      - jenkins_data/:/var/jenkins_home
+      - ./ansible/:/ansible

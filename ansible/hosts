@@ -1,0 +1,7 @@
+[build]
+
+
+
+[deploy]
+35.171.146.80 ansible_connection=ssh ansible_user=root ansible_become=yes ansible_python_interpreter=/usr/bin/python3
+
