@@ -24,6 +24,6 @@ node ("aws-slave-1") {
 
     stage ("deployment") {
         println("deploying Order service")
-        sh "docker-compose up -d --build"
+        sh "sudo docker-compose up -d --build"
     }
 }
