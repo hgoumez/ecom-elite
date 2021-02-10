@@ -87,3 +87,5 @@ services:
     user: root
     volumes:
       - ./realms/ecom.json:/import/ecom.json
+      - ./standalone/standalone.xml:/opt/jboss/keycloak/standalone/configuration/standalone.xml
+      - ./standalone/keycloak.jks:/opt/jboss/keycloak/standalone/configuration/keycloak.jks
