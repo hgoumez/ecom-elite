@@ -1,10 +1,10 @@
 {
   "/product-api/*": {
-    "target": "http://localhost:8070",
+    "target": "http://localhost:8080",
     "secure": false
   },
   "/order-api/*": {
-    "target": "http://localhost:8071",
+    "target": "http://localhost:8081",
     "secure": false
   }
 }

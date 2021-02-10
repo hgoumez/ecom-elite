@@ -1,0 +1,6 @@
+FROM jboss/keycloak:12.0.2
+USER root
+ADD ecom-config.json /data/import.json
+RUN chown -R jboss:jboss /data
+USER jboss
+CMD ["-b", "0.0.0.0", "-Dkeycloak.import=/data/import.json", "-Dkeycloak.migration.action=export", "-Dkeycloak.migration.provider=dir", "-Dkeycloak.migration.usersExportStrategy=REALM_FILE",

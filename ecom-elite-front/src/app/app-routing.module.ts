@@ -1,11 +1,34 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {HomeTemplateComponent} from './core/home-template/container/home-template.component';
+import {AuthenticationGuard} from './core/guards/authentication.guard';
+import {ProductDashboardComponent} from './features/product-dashboard/product-dashboard.component';
+import {OrderDashboardComponent} from './features/order-dashboard/order-dashboard.component';
 
 
-const routes: Routes = [];
+const appRoutes: Routes = [
+
+  {
+    path: '', component: HomeTemplateComponent, canActivate: [AuthenticationGuard],
+
+    children: [
+      {
+        path: 'products',
+        component: ProductDashboardComponent,
+      },
+      {
+        path: 'orders',
+        component: OrderDashboardComponent
+      }
+    ],
+  },
+  {path: '**', component: HomeTemplateComponent}
+
+];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

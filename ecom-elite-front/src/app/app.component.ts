@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { OrderService } from './services/order.service';
-import { ProductService } from './services/product.service';
-import { first } from 'rxjs/operators'
+import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
+import {filter} from 'rxjs/operators'
+import {OAuthService} from 'angular-oauth2-oidc';
+import {authCodeFlowConfig} from './auth.config';
 
 @Component({
   selector: 'app-root',
@@ -10,15 +10,36 @@ import { first } from 'rxjs/operators'
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  products$: Observable<any>;
-  orders$: Observable<any>;
-  name$: Observable<any>;
 
-  constructor(private readonly productService: ProductService,private readonly orderService: OrderService) {}
+  constructor(private oauthService: OAuthService) {
+
+    this.oauthService.events
+      .pipe(filter(e => e.type === 'token_received'))
+      .subscribe(_ => {
+        console.log("token received");
+      });
+  }
 
   ngOnInit() {
-    this.products$ = this.productService.getProducts().pipe(first());
-    this.orders$ = this.orderService.getOrders().pipe(first());
-    this.name$ = this.orderService.getServerName().pipe(first());
+    this.oauthService.configure(authCodeFlowConfig);
+    this.oauthService.loadDiscoveryDocumentAndLogin();
+  }
+
+  get userName(): string {
+    const claims = this.oauthService.getIdentityClaims();
+    if (!claims) return null;
+    return claims['given_name'];
+  }
+
+  get idToken(): string {
+    return this.oauthService.getIdToken();
+  }
+
+  get accessToken(): string {
+    return this.oauthService.getAccessToken();
+  }
+
+  refresh() {
+    this.oauthService.refreshToken();
   }
 }

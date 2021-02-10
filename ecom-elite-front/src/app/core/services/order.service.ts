@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import {OrderModel} from '../models/order.model';
+import {ProductModel} from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -8,12 +10,8 @@ import { Observable } from 'rxjs';
 export class OrderService {
 
   constructor(private readonly http: HttpClient) { }
-
-  getServerName(): Observable<any> {
-    return this.http.get('/order-api/server-name');
-  }
-
-  getOrders(): Observable<any> {
-    return this.http.get('/order-api/orders');
+  
+  getOrders(): Observable<OrderModel[]> {
+    return this.http.get<OrderModel[]>('/order-api/orders');
   }
 }
