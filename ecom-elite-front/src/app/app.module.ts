@@ -22,7 +22,7 @@ import {TranslateModule} from '@ngx-translate/core';
     CoreModule,
     FeaturesModule,
     TranslateModule,
-    OAuthModule.forRoot()
+    OAuthModule.forRoot({resourceServer: {allowedUrls: ['/product-api', '/order-api'], sendAccessToken: true}})
   ],
   providers: [
     {

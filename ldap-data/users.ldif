@@ -1,0 +1,28 @@
+dn: dc=ecom-elite,dc=fr
+objectclass: dcObject
+objectclass: organization
+o: ecom-elite
+dc: ecom-elite
+
+
+dn: ou=Person,dc=ecom-elite,dc=fr
+objectclass: top
+objectclass: organizationalUnit
+ou: Person
+
+dn: ou=Machines,dc=ecom-elite,dc=fr
+objectclass: top
+objectclass: organizationalUnit
+ou: Machines
+
+dn: uid=ayoucef,ou=Person,dc=ecom-elite,dc=fr
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+uid: ayoucef
+cn: adam
+sn: youcef
+mail: a_youcef@esi.dz
+postalCode: 91000
+userPassword: admin
