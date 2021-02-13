@@ -24,9 +24,13 @@ services:
     links:
       - order-postgres:order-bdd
       - keycloak:keycloak
+      - elasticsearch:elasticsearch
+      - logstash:logstash
     environment:
       server_name: "order-1"
       SPRING_PROFILES_ACTIVE: prod
+    volumes:
+      - ./order/filebeat.yml:/filebeat-7.10.1-linux-x86_64/filebeat.yml
 
   order-2:
     build:
@@ -39,9 +43,13 @@ services:
     links:
       - order-postgres:order-bdd
       - keycloak:keycloak
+      - elasticsearch:elasticsearch
+      - logstash:logstash
     environment:
       server_name: "order-2"
       SPRING_PROFILES_ACTIVE: prod
+    volumes:
+      - ./order/filebeat.yml:/filebeat-7.10.1-linux-x86_64/filebeat.yml
 
   ecom-elite-front:
     build:
@@ -53,7 +61,7 @@ services:
       - product:product-api
       - order-1:order-1-api
       - order-2:order-2-api
-      - keycloak:keycloak
+#      - keycloak:keycloak
     ports:
       - "8072:80"
     volumes:
@@ -102,3 +110,54 @@ services:
       - PASSWORD=admin
     volumes:
       - ./ldap-data:/ldifs
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
+    container_name: elastic
+    environment:
+      - node.name=es01
+      - bootstrap.memory_lock=true
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      nproc: 65535
+      memlock:
+        soft: -1
+        hard: -1
+    cap_add:
+      - ALL
+    privileged: true
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana-oss:7.10.1
+    container_name: kibana
+    links:
+      - elasticsearch:elasticsearch
+    environment:
+      SERVER_NAME: localhost
+      ELASTICSEARCH_URL: http://elasticsearch:9200/
+    ports:
+      - 5601:5601
+    ulimits:
+      nproc: 65535
+      memlock:
+        soft: -1
+        hard: -1
+    cap_add:
+      - ALL
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.10.1
+    container_name: logstash
+    links:
+      - elasticsearch:elasticsearch
+    ports:
+      - 5045:5045
+    volumes:
+      - ./beats.conf:/usr/share/logstash/config/logstash-sample.conf
+volumes:
+  esdata1:

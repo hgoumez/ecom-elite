@@ -1,5 +1,6 @@
-FROM openjdk:17-ea-6-jdk
+FROM ubuntu
 MAINTAINER Mahdi CHEKINI <me.chekini@gmail.com>
+RUN apt-get update && apt-get install openjdk-11-jdk -y
 WORKDIR /opt
 ADD target/product-*.jar product.jar
 EXPOSE 8080

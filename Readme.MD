@@ -1,7 +1,7 @@
 # FRONT
 * data table produit
 * data table order
-* side bar
+* side bar                       // DONE
 
 # BACK
 * kafka
@@ -21,7 +21,7 @@ Installation et configuration d'un LDAP ( AD )
 Synchronisation keycloak LDAP
 Refresh Token
 Revoke Token
-installation d'un certificat pour keycloak
+installation d'un certificat pour keycloak    // DONE
 
 
   * httpd OIDC ou PKCE
@@ -33,7 +33,7 @@ installation d'un certificat pour keycloak
   * temps de réponse 
   * simplicité des requêtes
 ## centralisation de Logs
-  * BELK (Beats Elastic Logstash Kibana)
+  * BELK (Beats Elastic Logstash Kibana)   DONE
   * Monitoring de l'application (APM)
 
 

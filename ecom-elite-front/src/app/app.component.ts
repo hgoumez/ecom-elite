@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
     this.oauthService.events
       .pipe(filter(e => e.type === 'token_received'))
       .subscribe(_ => {
-        console.log("token received");
+        console.log('token received');
       });
   }
 
