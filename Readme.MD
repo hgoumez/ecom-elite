@@ -32,9 +32,20 @@ installation d'un certificat pour keycloak    // DONE
 ## recherche multi criteres sur les produits (Elastic vs BDD)
   * temps de réponse 
   * simplicité des requêtes
+  
+  
+  * différence entre les types de fields
+  * manipulation des scores de recherches
+  
+  * définition d'un type vérifier la suppression à partir de la version 7
+  * création des analyseurs ( search -analyser elastic search )
+  
+  * shards in cluster
+  * Avantages / Inconvénients Spring Data Elastic / RestElastic Client
 ## centralisation de Logs
   * BELK (Beats Elastic Logstash Kibana)   DONE
   * Monitoring de l'application (APM)
+  
 
 
 # DEVOPS

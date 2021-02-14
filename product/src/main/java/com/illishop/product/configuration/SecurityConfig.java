@@ -12,18 +12,12 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(
-        prePostEnabled = true,
-        securedEnabled = true,
-        jsr250Enabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().anyRequest().authenticated()
-                .and()
-                .oauth2ResourceServer().jwt();
+        http.authorizeRequests().anyRequest().permitAll().and().csrf().disable();
 
 //                .oauth2ResourceServer().jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter()));
     }
