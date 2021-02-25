@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: product-db
+  labels:
+    application: product-db
+    type: database
+spec:
+  containers:
+    - name: product-db
+      image: postgres
+      imagePullPolicy: IfNotPresent
+      env:
+        - name: POSTGRES_PASSWORD
+          value: product
+      ports:
+        - containerPort: 5432

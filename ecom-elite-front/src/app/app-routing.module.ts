@@ -9,7 +9,7 @@ import {OrderDashboardComponent} from './features/order-dashboard/order-dashboar
 const appRoutes: Routes = [
 
   {
-    path: '', component: HomeTemplateComponent, canActivate: [AuthenticationGuard],
+    path: '', component: HomeTemplateComponent,
 
     children: [
       {
