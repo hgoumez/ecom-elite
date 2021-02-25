@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: order-db
+  labels:
+    application: order-db
+    type: database
+spec:
+  containers:
+    - name: order-db
+      image: postgres
+      imagePullPolicy: IfNotPresent
+      env:
+        - name: POSTGRES_PASSWORD
+          value: order
+      ports:
+        - containerPort: 5432

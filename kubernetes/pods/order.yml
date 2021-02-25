@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: order
+  labels:
+    application: order
+    type: back-end
+spec:
+  containers:
+    - name: order
+      image: order
+      imagePullPolicy: Never

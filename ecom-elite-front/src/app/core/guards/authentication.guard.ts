@@ -1,12 +1,13 @@
 import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot} from "@angular/router";
 import {Injectable} from "@angular/core";
+import {OAuthService} from "angular-oauth2-oidc";
 
 
 @Injectable()
 export class AuthenticationGuard implements CanActivate {
 
 
-  constructor() {
+  constructor(private oauthService: OAuthService) {
 
   }
 

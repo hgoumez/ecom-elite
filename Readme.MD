@@ -51,7 +51,7 @@ installation d'un certificat pour keycloak    // DONE
 # DEVOPS
 ## Ansible
 ## Cloud
-## Kubernets
+## Kubernetes
 ## CI/CD
   * gitlab-ci
   * Jenkins
@@ -66,3 +66,47 @@ installation d'un certificat pour keycloak    // DONE
 
 openssl req -new -key keycloak.key -subj "/CN=keycloak" -out admin.csr
 
+
+
+
+
+
+in the next episode
+creates deployments  | mise à jour des déploiements
+configMap
+secrets
+Dashboard | Lens  --facultatif
+
+namespaces
+Security (Role, RoleBinding, create Users, Service Account)
+          Vault
+
+
+Ingress
+daemonset
+jobs
+
+
+Deploy application to AWS with kubeadm
+
+
+Advanced Scheduling
+
+
+
+Récapitulatif des commandes
+StatefulSet
+Helm
+
+Volumes en détail
+Reseau en détail
+
+
+Monitoring ( Prometheus, Grafana )
+Istio
+ArgoCD
+CrossPlane
+
+
+
+Deploy application on Kubernetes Cluster( The Hard Way)
