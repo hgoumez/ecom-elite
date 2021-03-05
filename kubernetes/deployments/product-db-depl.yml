@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-db-deploy
+spec:
+  selector:
+    matchLabels:
+      application: product-db
+  template:
+    metadata:
+      name: product-db
+      labels:
+        application: product-db
+        type: database
+    spec:
+      containers:
+        - name: product-db
+          image: postgres
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: POSTGRES_PASSWORD
+              value: product
+          ports:
+            - containerPort: 5432

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-deploy
+spec:
+  selector:
+    matchLabels:
+      application: product
+  template:
+    metadata:
+      name: product
+      labels:
+        application: product
+        type: back-end
+    spec:
+      containers:
+        - name: product
+          image: product
+          imagePullPolicy: Never
+          command: ["java", "-jar", "/opt/product.jar", "--spring.config.location=file:///configuration/application.properties"]
+          envFrom:
+            - secretRef:
+                name: product-secrets
+          volumeMounts:
+            - mountPath: /configuration
+              name: product-config
+      volumes:
+        - name: product-config
+          configMap:
+            name: product-config-map

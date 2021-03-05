@@ -1,9 +1,56 @@
-#apiVersion: apps/v1
-#kind: Deployment
-#metadata:
-#  name: order-deploy
-#  namespace: ecom-ns
-#spec:
-#  selector:
-#
-#  template:
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-deploy
+spec:
+  selector:
+    matchLabels:
+      application: order
+  template:
+    metadata:
+      name: order
+      labels:
+        application: order
+        type: back-end
+    spec:
+      containers:
+        - name: order
+          ports:
+            - containerPort: 8080
+              name: default-port
+          image: order
+          imagePullPolicy: Never
+          resources:
+            requests:
+              cpu: "500m"
+            limits:
+              cpu: "10000m"
+          command:
+            - java
+            - -jar
+            - /opt/order.jar
+            - --spring.config.location=file:///configuration/application.properties
+          livenessProbe:
+            httpGet:
+              path: /order-api/actuator/health/liveness
+              port: default-port
+            initialDelaySeconds: 120
+            periodSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /order-api/actuator/health/readiness
+              port: default-port
+            initialDelaySeconds: 3
+            periodSeconds: 3
+          volumeMounts:
+            - mountPath: /configuration
+              name: app-config
+          envFrom:
+            - secretRef:
+                name: order-secrets
+      volumes:
+        - name: app-config
+          configMap:
+            name: order-config-map
+  replicas: 1

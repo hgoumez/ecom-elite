@@ -6,3 +6,8 @@ export interface OrderModel {
   customerLastName: string;
 
 }
+
+export interface OrderDto {
+  hostName: string;
+  orderList: OrderModel[];
+}

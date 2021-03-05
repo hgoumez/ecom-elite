@@ -23,15 +23,17 @@ export class OrderDashboardComponent implements OnInit {
   price: number;
   name: string;
   description: string;
+  hostName: string;
 
   ngOnInit(): void {
 
     this.initColumns();
     this.orderService.getOrders().subscribe(data => {
-      this.rows = data;
-      this.totalElements = data.length;
+      this.rows = data.orderList;
+      this.totalElements = data.orderList.length;
       this.size = 10;
       this.pageNumber = 0;
+      this.hostName = data.hostName;
     })
   }
 

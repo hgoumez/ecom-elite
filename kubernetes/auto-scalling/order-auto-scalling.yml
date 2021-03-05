@@ -1,0 +1,13 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: order-auto-scaller
+spec:
+  minReplicas: 2
+  maxReplicas: 5
+  scaleTargetRef:
+    apiVersion: extensions/v2beta2
+    kind: Deployment
+    name: order-deploy
+  targetCPUUtilizationPercentage: 20
+

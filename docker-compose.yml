@@ -1,75 +1,75 @@
 version: '2'
 services:
-  product:
-    build:
-      context: product
-      dockerfile: Dockerfile
-    image: product
-    container_name: product
-    ports:
-      - "8070:8080"
-    environment:
-      SPRING_PROFILES_ACTIVE: prod
-      server_name: "product"
-    links:
-      - product-postgres:product-bdd
-      - keycloak:keycloak
-      - logstash:logstash
-    volumes:
-      - ./filebeat.yml:/filebeat-7.10.1-linux-x86_64/filebeat.yml
-  order-1:
-    build:
-      context: order
-      dockerfile: Dockerfile
-    image: order
-    container_name: order-1
-    ports:
-      - "8071:8080"
-    links:
-      - order-postgres:order-bdd
-      - keycloak:keycloak
-      - elasticsearch:elasticsearch
-      - logstash:logstash
-    environment:
-      server_name: "orderone"
-      SPRING_PROFILES_ACTIVE: prod
-    volumes:
-      - ./filebeat.yml:/filebeat-7.10.1-linux-x86_64/filebeat.yml
-
-  order-2:
-    build:
-      context: order
-      dockerfile: Dockerfile
-    image: order
-    container_name: order-2
-    ports:
-      - "8073:8080"
-    links:
-      - order-postgres:order-bdd
-      - keycloak:keycloak
-      - elasticsearch:elasticsearch
-      - logstash:logstash
-    environment:
-      server_name: "ordertwo"
-      SPRING_PROFILES_ACTIVE: prod
-    volumes:
-      - ./filebeat.yml:/filebeat-7.10.1-linux-x86_64/filebeat.yml
-
-  ecom-elite-front:
-    build:
-      context: ecom-elite-front
-      dockerfile: Dockerfile
-    container_name: ecom-elite-front
-    image: ecom-elite-front
-    links:
-      - product:product-api
-      - order-1:order-1-api
-      - order-2:order-2-api
+#  product:
+#    build:
+#      context: product
+#      dockerfile: Dockerfile
+#    image: product
+#    container_name: product
+#    ports:
+#      - "8070:8080"
+#    environment:
+#      SPRING_PROFILES_ACTIVE: prod
+#      server_name: "product"
+#    links:
+#      - product-postgres:product-bdd
 #      - keycloak:keycloak
-    ports:
-      - "8072:80"
-    volumes:
-      - ./ecom-elite-front/conf:/etc/nginx/conf.d/
+#      - logstash:logstash
+#    volumes:
+#      - ./filebeat.yml:/filebeat-7.10.1-linux-x86_64/filebeat.yml
+#  order-1:
+#    build:
+#      context: order
+#      dockerfile: Dockerfile
+#    image: order
+#    container_name: order-1
+#    ports:
+#      - "8071:8080"
+#    links:
+#      - order-postgres:order-bdd
+#      - keycloak:keycloak
+#      - elasticsearch:elasticsearch
+#      - logstash:logstash
+#    environment:
+#      server_name: "orderone"
+#      SPRING_PROFILES_ACTIVE: prod
+#    volumes:
+#      - ./filebeat.yml:/filebeat-7.10.1-linux-x86_64/filebeat.yml
+#
+#  order-2:
+#    build:
+#      context: order
+#      dockerfile: Dockerfile
+#    image: order
+#    container_name: order-2
+#    ports:
+#      - "8073:8080"
+#    links:
+#      - order-postgres:order-bdd
+#      - keycloak:keycloak
+#      - elasticsearch:elasticsearch
+#      - logstash:logstash
+#    environment:
+#      server_name: "ordertwo"
+#      SPRING_PROFILES_ACTIVE: prod
+#    volumes:
+#      - ./filebeat.yml:/filebeat-7.10.1-linux-x86_64/filebeat.yml
+#
+#  ecom-elite-front:
+#    build:
+#      context: ecom-elite-front
+#      dockerfile: Dockerfile
+#    container_name: ecom-elite-front
+#    image: ecom-elite-front
+#    links:
+#      - product:product-api
+#      - order-1:order-1-api
+#      - order-2:order-2-api
+##      - keycloak:keycloak
+#    ports:
+#      - "8072:80"
+#    volumes:
+#      - ./ecom-elite-front/conf:/etc/nginx/conf.d/
 
   order-postgres:
     image: postgres
@@ -78,91 +78,91 @@ services:
       - "5432:5432"
     environment:
       - POSTGRES_PASSWORD=order
-  product-postgres:
-    image: postgres
-    container_name: product-postgres
-    ports:
-      - "5433:5432"
-    environment:
-      - POSTGRES_PASSWORD=product
-
-
-  keycloak:
-    image: jboss/keycloak
-    container_name: keycloak
-    ports:
-      - "8074:8080"
-    environment:
-      - KEYCLOAK_USER=admin
-      - KEYCLOAK_PASSWORD=admin
-      - KEYCLOAK_IMPORT=/import/ecom.json
-    user: root
-    volumes:
-      - ./realms/ecom.json:/import/ecom.json
-      - ./standalone/standalone.xml:/opt/jboss/keycloak/standalone/configuration/standalone.xml
-      - ./standalone/keycloak.jks:/opt/jboss/keycloak/standalone/configuration/keycloak.jks
-
-
-  ldap:
-    image: mwaeckerlin/openldap
-    container_name: ldap
-    ports:
-      - '389:389'
-    environment:
-      - DOMAIN=ecom-elite.fr
-      - ORGANIZATION=Person
-      - PASSWORD=admin
-    volumes:
-      - ./ldap-data:/ldifs
-
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
-    container_name: elastic
-    environment:
-      - node.name=es01
-      - bootstrap.memory_lock=true
-      - discovery.type=single-node
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    ulimits:
-      nproc: 65535
-      memlock:
-        soft: -1
-        hard: -1
-    cap_add:
-      - ALL
-    privileged: true
-    volumes:
-      - esdata1:/usr/share/elasticsearch/data
-    ports:
-      - 9200:9200
-      - 9300:9300
-
-  kibana:
-    image: docker.elastic.co/kibana/kibana-oss:7.10.1
-    container_name: kibana
-    links:
-      - elasticsearch:elasticsearch
-    environment:
-      SERVER_NAME: localhost
-      ELASTICSEARCH_URL: http://elasticsearch:9200/
-    ports:
-      - 5601:5601
-    ulimits:
-      nproc: 65535
-      memlock:
-        soft: -1
-        hard: -1
-    cap_add:
-      - ALL
-  logstash:
-    image: docker.elastic.co/logstash/logstash:7.10.1
-    container_name: logstash
-    links:
-      - elasticsearch:elasticsearch
-    ports:
-      - 5045:5045
-    volumes:
-      - ./beats.conf:/usr/share/logstash/config/logstash-sample.conf
-    entrypoint: ./bin/logstash -f /usr/share/logstash/config/logstash-sample.conf --path.data datadirectory
-volumes:
-  esdata1:
+#  product-postgres:
+#    image: postgres
+#    container_name: product-postgres
+#    ports:
+#      - "5433:5432"
+#    environment:
+#      - POSTGRES_PASSWORD=product
+#
+#
+#  keycloak:
+#    image: jboss/keycloak
+#    container_name: keycloak
+#    ports:
+#      - "8074:8080"
+#    environment:
+#      - KEYCLOAK_USER=admin
+#      - KEYCLOAK_PASSWORD=admin
+#      - KEYCLOAK_IMPORT=/import/ecom.json
+#    user: root
+#    volumes:
+#      - ./realms/ecom.json:/import/ecom.json
+#      - ./standalone/standalone.xml:/opt/jboss/keycloak/standalone/configuration/standalone.xml
+#      - ./standalone/keycloak.jks:/opt/jboss/keycloak/standalone/configuration/keycloak.jks
+#
+#
+#  ldap:
+#    image: mwaeckerlin/openldap
+#    container_name: ldap
+#    ports:
+#      - '389:389'
+#    environment:
+#      - DOMAIN=ecom-elite.fr
+#      - ORGANIZATION=Person
+#      - PASSWORD=admin
+#    volumes:
+#      - ./ldap-data:/ldifs
+#
+#  elasticsearch:
+#    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
+#    container_name: elastic
+#    environment:
+#      - node.name=es01
+#      - bootstrap.memory_lock=true
+#      - discovery.type=single-node
+#      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+#    ulimits:
+#      nproc: 65535
+#      memlock:
+#        soft: -1
+#        hard: -1
+#    cap_add:
+#      - ALL
+#    privileged: true
+#    volumes:
+#      - esdata1:/usr/share/elasticsearch/data
+#    ports:
+#      - 9200:9200
+#      - 9300:9300
+#
+#  kibana:
+#    image: docker.elastic.co/kibana/kibana-oss:7.10.1
+#    container_name: kibana
+#    links:
+#      - elasticsearch:elasticsearch
+#    environment:
+#      SERVER_NAME: localhost
+#      ELASTICSEARCH_URL: http://elasticsearch:9200/
+#    ports:
+#      - 5601:5601
+#    ulimits:
+#      nproc: 65535
+#      memlock:
+#        soft: -1
+#        hard: -1
+#    cap_add:
+#      - ALL
+#  logstash:
+#    image: docker.elastic.co/logstash/logstash:7.10.1
+#    container_name: logstash
+#    links:
+#      - elasticsearch:elasticsearch
+#    ports:
+#      - 5045:5045
+#    volumes:
+#      - ./beats.conf:/usr/share/logstash/config/logstash-sample.conf
+#    entrypoint: ./bin/logstash -f /usr/share/logstash/config/logstash-sample.conf --path.data datadirectory
+#volumes:
+#  esdata1:

@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-db-deploy
+spec:
+  selector:
+    matchLabels:
+      application: order-db
+  template:
+    metadata:
+      name: order-db
+      labels:
+        application: order-db
+        type: database
+    spec:
+      containers:
+        - name: order-db
+          image: postgres
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: POSTGRES_PASSWORD
+              value: order
+          ports:
+            - containerPort: 5432

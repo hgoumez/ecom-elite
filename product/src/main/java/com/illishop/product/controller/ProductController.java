@@ -1,8 +1,10 @@
 package com.illishop.product.controller;
 
 import com.illishop.product.model.Product;
+import com.illishop.product.model.ProductWithHostName;
 import com.illishop.product.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +17,9 @@ import java.util.List;
 @Slf4j
 public class ProductController {
 
+    @Value("${version}")
+    String version;
+
     private final ProductService service;
 
     public ProductController(ProductService service) {
@@ -22,8 +27,13 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    public List<Product> getAllOrders() {
-        return service.getAllProducts();
+    public ProductWithHostName getAllOrders() {
+        log.info("retrieve all products from database");
+        List<Product> products = service.getAllProducts();
+        return ProductWithHostName.builder()
+                .productList(products)
+                .hostName(System.getenv("HOSTNAME"))
+                .build();
     }
 
 
@@ -36,14 +46,24 @@ public class ProductController {
     }
 
 
+    @GetMapping("version")
+    public String getAppVersion() {
+        return version;
+    }
+
+
     @PostMapping("/searchByCriteria")
-    public List<Product> searchByCriteria(@RequestBody CriteriaFilter criteria) {
-        return service.searchByCriteria(criteria);
+    public ProductWithHostName searchByCriteria(@RequestBody CriteriaFilter criteria) {
+        List<Product> products = service.searchByCriteria(criteria);
+        return ProductWithHostName.builder()
+                .productList(products)
+                .hostName(System.getenv("HOSTNAME"))
+                .build();
     }
 
 
     @PostConstruct
-    public void initEsData(){
+    public void initEsData() {
         service.initEsData();
     }
 }

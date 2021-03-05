@@ -15,11 +15,11 @@ import java.util.UUID;
 public class ProductService {
 
     private final ProductRepository repository;
-    private final ProductEsRepository esRepository;
+//    private final ProductEsRepository esRepository;
 
-    public ProductService(ProductRepository repository, ProductEsRepository esRepository) {
+    public ProductService(ProductRepository repository) {
         this.repository = repository;
-        this.esRepository = esRepository;
+//        this.esRepository = esRepository;
     }
 
     public List<Product> getAllProducts() {
@@ -56,13 +56,13 @@ public class ProductService {
 
     public void initEsData() {
 
-        ProductIndex product = ProductIndex.builder()
-                .id(1L)
-                .description("description test")
-                .name("name es")
-                .price(23L)
-                .build();
-
-        esRepository.save(product);
+//        ProductIndex product = ProductIndex.builder()
+//                .id(1L)
+//                .description("description test")
+//                .name("name es")
+//                .price(23L)
+//                .build();
+//
+//        esRepository.save(product);
     }
 }

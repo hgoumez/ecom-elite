@@ -9,8 +9,8 @@ import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
-@Configuration
-@EnableElasticsearchRepositories(basePackages = "com.illishop.product.elasticsearch.documents")
+//@Configuration
+//@EnableElasticsearchRepositories(basePackages = "com.illishop.product.elasticsearch.documents")
 public class ElasticsearchConfig {
 
     @Bean

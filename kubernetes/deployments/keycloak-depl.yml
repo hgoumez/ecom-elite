@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak-deploy
+spec:
+  selector:
+    matchLabels:
+      application: keycloak
+  template:
+    metadata:
+      name: keycloak
+      labels:
+        application: keycloak
+        type: auth-server
+    spec:
+      containers:
+        - name: keycloak
+          image: jboss/keycloak
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: KEYCLOAK_USER
+              value: admin
+            - name: KEYCLOAK_PASSWORD
+              value: admin
+            - name: KEYCLOAK_IMPORT
+              value: /import/ecom.json
+          volumeMounts:
+            - mountPath: /import/
+              name: kc-configuration
+          ports:
+            - containerPort: 8080
+      volumes:
+        - name: kc-configuration
+          hostPath:
+            path: /c/Users/Mahdi/Documents/ecom-elite/kubernetes/pods/config

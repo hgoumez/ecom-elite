@@ -24,6 +24,7 @@ export const ROUTES: RouteInfo[] = [
 export class SideBarComponent implements OnInit {
 
   sideBarItems: RouteInfo[] = [];
+  appVersion = 'V1';
 
   constructor(private translateService: TranslateService) {
     this.translateService.use("fr");

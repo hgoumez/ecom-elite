@@ -72,41 +72,44 @@ openssl req -new -key keycloak.key -subj "/CN=keycloak" -out admin.csr
 
 
 in the next episode
-creates deployments  | mise à jour des déploiements
-configMap
-secrets
-Dashboard | Lens  --facultatif
+creates deployments                    OK
+mise à jour des déploiements           KO
+configMap                              OK
+secrets                                OK
+Dashboard | Lens  --facultatif         OK
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended.yaml
 
-namespaces
-Security (Role, RoleBinding, create Users, Service Account)
-          Vault
+namespaces                             KO
+Security (Role, RoleBinding, create Users, Service Account) KO
+          Vault KO
 
+paradoxe de hamouche (pods déja existant, lancement des déploiement derrière) KO
 
-Ingress
-daemonset
-jobs
-
-
-Deploy application to AWS with kubeadm
-
-
-Advanced Scheduling
+Ingress               KO
+daemonset             KO
+jobs                  KO
 
 
-
-Récapitulatif des commandes
-StatefulSet
-Helm
-
-Volumes en détail
-Reseau en détail
+Create cluster in AWS with kubeadm using ansible KO
 
 
-Monitoring ( Prometheus, Grafana )
-Istio
-ArgoCD
-CrossPlane
+Advanced Scheduling                              KO
 
 
 
-Deploy application on Kubernetes Cluster( The Hard Way)
+Récapitulatif des commandes                      KO
+StatefulSet                                      KO
+Helm                                             KO
+
+Volumes en détail                                KO
+Reseau en détail                                 KO
+
+
+Monitoring ( Prometheus, Grafana )               KO
+Istio                                            KO
+ArgoCD                                           KO
+CrossPlane                                       KO
+
+
+
+Deploy application on Kubernetes Cluster( The Hard Way )      KO
